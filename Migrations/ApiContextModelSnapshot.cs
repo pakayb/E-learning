@@ -35,6 +35,20 @@ namespace ELearningV2.Migrations
                     b.ToTable("Lessons");
                 });
 
+            modelBuilder.Entity("ELearningV2.Models.Logged", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Activeusers");
+                });
+
             modelBuilder.Entity("ELearningV2.Models.Module", b =>
                 {
                     b.Property<long>("Id")
@@ -74,29 +88,37 @@ namespace ELearningV2.Migrations
 
             modelBuilder.Entity("ELearningV2.Models.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<long>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(15);
 
                     b.Property<string>("LastName")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(15);
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<long>("ReachedPartId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Username")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(20);
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });

@@ -1,0 +1,13 @@
+﻿@page
+@model ELearningV2.Pages.LoginModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div>
+    <h1>Login</h1>
+    <form method="post" asp-page="Login">
+        <input asp-for="User.Email" placeholder="Email" />
+        <input asp-for="User.Password" placeholder="Password" />
+        <p hidden="@Model.ValidLogin">Given Email or Password is not valid</p>
+        <input type="submit" value="Login" asp-page-handler="Login" />
+    </form>
+</div>
