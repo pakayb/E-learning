@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace ELearningV2.Models
 {
@@ -9,11 +10,7 @@ namespace ELearningV2.Models
     {
         public long Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public long ModuleId { get; set; }
-        public string ModuleName { get; set; }
-        public string Body { get; set; }
-        //public long UserId { get; set; }
-        public int PartNumber { get; set; }
-        //public DateTime Date { get; set; }
     }
 }

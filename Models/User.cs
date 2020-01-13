@@ -13,7 +13,7 @@ namespace ELearningV2.Models
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-
+        public long ReachedPartId { get; set; }
 
     }
 }
