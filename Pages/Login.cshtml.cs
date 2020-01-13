@@ -38,7 +38,7 @@ namespace ELearningV2.Pages
                 {
                     if (user.Password.Equals(User.Password))
                     {
-                        _context.Activeusers.Add(new Logged {UserId = user.UserId});
+                        _context.ActiveUsers.Add(new Logged {UserId = user.UserId});
                         await _context.SaveChangesAsync();
                         ValidLogin = true;
                         return Redirect("Index");
