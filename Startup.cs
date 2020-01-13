@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ELearningV2.Context;
 
 namespace ELearningV2
 {
@@ -32,6 +33,7 @@ namespace ELearningV2
                 opt.AddConsole();
                 opt.AddDebug();
             });
+            services.AddScoped<ApiContext>();
             services.AddRazorPages();
             services.AddControllers();
         }
