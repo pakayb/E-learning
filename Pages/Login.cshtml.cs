@@ -33,19 +33,20 @@ namespace ELearningV2.Pages
         public async Task<IActionResult> OnPostLogin()
         {
 
-            var userDb = await _context.Users.ToArrayAsync();
+            var usersDb = await _context.Users.ToArrayAsync();
             try
             {
-               User user = userDb.First(u => u.Email.Equals(User.Email));
+                User user = usersDb.First(u => u.Email.Equals(User.Email));
 
                 if (user.Password.Equals(User.Password))
                 {
-                    _context.ActiveUsers.Add(new Logged { UserId = user.UserId });
-                    await _context.SaveChangesAsync();
+                    NewSessionForUser(user.UserId);
                     ValidLogin = true;
+                    await _context.SaveChangesAsync();
                     return Redirect("Index");
                 }
-            }catch(InvalidOperationException e)
+            }
+            catch (InvalidOperationException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -54,6 +55,24 @@ namespace ELearningV2.Pages
 
         }
 
+        private async void NewSessionForUser(long userId)
+        {
+            var loggedUserDb = await _context.ActiveUsers.ToArrayAsync();
+            try
+            {
+                Logged loggedUser = loggedUserDb.First(u => u.UserId.Equals(userId));
+                _context.ActiveUsers.Remove(loggedUser);
+            } catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                _context.ActiveUsers.Add(new Logged { UserId = userId });
+                await _context.SaveChangesAsync();
+            }
+
+        }
+
     }
 }
- 
