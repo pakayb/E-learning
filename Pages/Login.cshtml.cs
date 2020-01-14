@@ -32,22 +32,28 @@ namespace ELearningV2.Pages
 
         public async Task<IActionResult> OnPostLogin()
         {
-            foreach (var user in _context.Users)
+
+            var userDb = await _context.Users.ToArrayAsync();
+            try
             {
-                if (user.Email.Equals(User.Email))
+               User user = userDb.First(u => u.Email.Equals(User.Email));
+
+                if (user.Password.Equals(User.Password))
                 {
-                    if (user.Password.Equals(User.Password))
-                    {
-                        _context.ActiveUsers.Add(new Logged {UserId = user.UserId});
-                        await _context.SaveChangesAsync();
-                        ValidLogin = true;
-                        return Redirect("Index");
-                    }
+                    _context.ActiveUsers.Add(new Logged { UserId = user.UserId });
+                    await _context.SaveChangesAsync();
+                    ValidLogin = true;
+                    return Redirect("Index");
                 }
+            }catch(InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message);
             }
             ValidLogin = false;
             return Page();
+
         }
 
     }
 }
+ 
