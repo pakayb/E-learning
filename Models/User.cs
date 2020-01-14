@@ -8,7 +8,7 @@ namespace ELearningV2.Models
 {
     public class User
     {
-        public long Id { get; set; }
+        public long UserId { get; set; }
         [Required, StringLength(15)]
         public string FirstName { get; set; }
         [Required, StringLength(15)]

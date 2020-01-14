@@ -17,6 +17,7 @@ namespace ELearningV2.Context
         public DbSet<Module> Modules { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Part> Parts { get; set; }
+        public DbSet<Logged> ActiveUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite("Data Source=elearning.db");
