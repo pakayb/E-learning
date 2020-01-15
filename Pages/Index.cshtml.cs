@@ -9,6 +9,7 @@ namespace ELearningV2.Pages
 {
     public class IndexModel : PageModel
     {
+
         public IActionResult OnGet()
         {
             return Page();

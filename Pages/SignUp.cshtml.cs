@@ -1,21 +1,21 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ELearningV2.Context;
+using Microsoft.AspNetCore.Identity;
 using ELearningV2.Models;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace ELearningV2.Pages.Users
 {
     public class SignUpModel : PageModel
     {
-        private readonly ApiContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public SignUpModel(ApiContext context)
+        public SignUpModel(UserManager<User> userManager)
         {
-            _context = context;
+            _userManager = userManager;
         }
         public IActionResult OnGet()
         {
@@ -25,54 +25,30 @@ namespace ELearningV2.Pages.Users
         public User User { get; set; }
 
         [BindProperty]
-        public bool ValidEmail { get; set; } = true;
-        [BindProperty]
-        public bool ValidUsername { get; set; } = true;
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostSignUp()
         {
+            if (ModelState.IsValid)
+            {
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            ValidateData();
-            if (ValidUsername && ValidEmail)
-            {
-                _context.Users.Add(User);
-                await _context.SaveChangesAsync();
-                return RedirectToPage("/Index");
-            }
-            else
-            {
-                return Page();
+                var result = await _userManager.CreateAsync(User, Password);
+              
+                if (result.Succeeded)
+                {
+                    return Redirect("Login");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError(String.Empty, error.Description);
+                }
             }
 
-        }
+            return Page();
 
-        private void ValidateData()
-        {
-            foreach (var user in _context.Users)
-            {
-                if (user.Email.Equals(User.Email))
-                {
-                    ValidEmail = false;
-                    break;
-                }
-                else
-                {
-                    ValidEmail = true;
-                }
-                if (user.Username.Equals(User.Username))
-                {
-                    ValidUsername = false;
-                    break;
-                }
-                else
-                {
-                    ValidUsername = true;
-                }
-            }
         }
 
     }

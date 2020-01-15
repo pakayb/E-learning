@@ -4,13 +4,14 @@
 
 <h1>Sign up</h1>
 
-<form method="post">
-    <input asp-for="User.FirstName" placeholder="Firstname" />
-    <input asp-for="User.LastName" placeholder="Lastname" />
-    <input asp-for="User.Username" placeholder="Username" />
-    <p hidden="@Model.ValidUsername">Given Username is not valid</p>
-    <input asp-for="User.Email" placeholder="Email" />
-    <p hidden="@Model.ValidEmail">Given Email is not valid</p>
-    <input asp-for="User.Password" placeholder="Password" />
-    <input type="submit" />
-</form>
+<div>
+    <form method="post">
+        <div asp-validation-summary="All"></div>
+        <input asp-for="User.FirstName" placeholder="Firstname" />
+        <input asp-for="User.LastName" placeholder="Lastname" />
+        <input asp-for="User.UserName" placeholder="Username" />
+        <input asp-for="User.Email" placeholder="Email" />
+        <input asp-for="Password" placeholder="Password" />
+        <input type="submit" asp-page-handler="SignUp" />
+    </form>
+</div> 

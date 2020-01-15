@@ -2,14 +2,23 @@
 @model ELearningV2.Pages.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<div>
+@{
+    Layout = "_Layout";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
 
     <div>
-        <h1>Welcome At JostCodeIt Elearning Site ! This WebSite Will Teach You Nothing </h1>
-    </div>
-    <form method="post" asp-page="Index">
-        <input type="submit" value="SignUp" asp-page-handler="SignUp" />
-        <input type="submit" value="Login" asp-page-handler="Login" />
-    </form>
 
-</div>
+        <div>
+            <h1>Welcome At JostCodeIt Elearning Site ! This WebSite Will Teach You Nothing </h1>
+        </div>
+    </div>
+
+</body>
+</html>

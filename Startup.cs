@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ELearningV2.Context;
+using Microsoft.AspNetCore.Identity;
+using ELearningV2.Models;
 
 namespace ELearningV2
 {
@@ -34,6 +36,13 @@ namespace ELearningV2
                 opt.AddDebug();
             });
             services.AddScoped<ApiContext>();
+            services.AddScoped<SignInManager<User>>();
+
+            services.AddDbContextPool<ApiContext>(
+                opt => opt.UseSqlServer(Configuration.GetConnectionString("ElearningDbConnection")));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApiContext>();
             services.AddRazorPages();
             services.AddControllers();
         }
@@ -49,6 +58,8 @@ namespace ELearningV2
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

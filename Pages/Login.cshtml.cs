@@ -1,76 +1,54 @@
 using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using ELearningV2.Context;
+using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using ELearningV2.Models;
 
 namespace ELearningV2.Pages
 {
     public class LoginModel : PageModel
     {
-        private readonly ApiContext _context;
+        private readonly SignInManager<User> _signInManager;
         public IActionResult OnGet()
         {
             return Page();
         }
 
-        public LoginModel(ApiContext context)
+        public LoginModel(SignInManager<User> signInManager)
         {
-            _context = context;
+            _signInManager = signInManager;
         }
 
         [BindProperty]
-        public User User { get; set; }
+        [Required]
+        public string UserName{get; set;}
 
         [BindProperty]
-        public bool ValidLogin { get; set; } = true;
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [BindProperty]
+        [Display(Name = "Remember Me")]
+        public bool RememberMe { get; set; }
 
         public async Task<IActionResult> OnPostLogin()
         {
-
-            var usersDb = await _context.Users.ToArrayAsync();
-            try
+            if (ModelState.IsValid)
             {
-                User user = usersDb.First(u => u.Email.Equals(User.Email));
+                var result = await _signInManager.PasswordSignInAsync(UserName, Password, RememberMe, false);
 
-                if (user.Password.Equals(User.Password))
+                if (result.Succeeded)
                 {
-                    NewSessionForUser(user.UserId);
-                    ValidLogin = true;
-                    await _context.SaveChangesAsync();
-                    return Redirect("Index");
+                    return Redirect("index");
                 }
+
+                ModelState.AddModelError(String.Empty, "Invalid Email or Password");
             }
-            catch (InvalidOperationException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            ValidLogin = false;
+
             return Page();
-
-        }
-
-        private async void NewSessionForUser(long userId)
-        {
-            var loggedUserDb = await _context.ActiveUsers.ToArrayAsync();
-            try
-            {
-                Logged loggedUser = loggedUserDb.First(u => u.UserId.Equals(userId));
-                _context.ActiveUsers.Remove(loggedUser);
-            } catch (InvalidOperationException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                _context.ActiveUsers.Add(new Logged { UserId = userId });
-                await _context.SaveChangesAsync();
-            }
 
         }
 

@@ -5,9 +5,10 @@
 <div>
     <h1>Login</h1>
     <form method="post" asp-page="Login">
-        <input asp-for="User.Email" placeholder="Email" />
-        <input asp-for="User.Password" placeholder="Password" />
-        <p hidden="@Model.ValidLogin">Given Email or Password is not valid</p>
+        <div asp-validation-summary="All"></div>
+        <input asp-for="UserName" placeholder="Username" />
+        <input asp-for="Password" placeholder="Password" />
+        <input asp-for="RememberMe" />
         <input type="submit" value="Login" asp-page-handler="Login" />
     </form>
 </div>
