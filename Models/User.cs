@@ -10,12 +10,15 @@ namespace ELearningV2.Models
     {
         public long Id { get; set; }
         [Required, StringLength(15)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required, StringLength(15)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [Required, StringLength(20)]
         public string Username { get; set; }
         [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }

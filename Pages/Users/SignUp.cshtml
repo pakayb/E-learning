@@ -1,16 +1,21 @@
 ﻿@page
 @model ELearningV2.Pages.Users.SignUpModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+
 
 <h1>Sign up</h1>
 
 <form method="post">
     <input asp-for="User.FirstName" placeholder="Firstname" />
-    <input asp-for="User.LastName" placeholder="Lastname" />
-    <input asp-for="User.Username" placeholder="Username" />
+    <span asp-validation-for="User.FirstName"></span>
+    <label>Last Name:</label><input asp-for="User.LastName" placeholder="Lastname" />
+    <span asp-validation-for="User.LastName"></span>
+    <label>User name: </label><input asp-for="User.Username" placeholder="Username" />
     <p hidden="@Model.ValidUsername">Given Username is not valid</p>
     <input asp-for="User.Email" placeholder="Email" />
     <p hidden="@Model.ValidEmail">Given Email is not valid</p>
     <input asp-for="User.Password" placeholder="Password" />
+    <span asp-validation-for="User.Password"></span>
     <input type="submit" />
 </form>
