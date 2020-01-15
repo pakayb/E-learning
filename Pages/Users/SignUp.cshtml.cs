@@ -52,27 +52,16 @@ namespace ELearningV2.Pages.Users
 
         private void ValidateData()
         {
-            foreach (var user in _context.Users)
+            if (_context.Users.Any(user=> user.Username == User.Username))
             {
-                if (user.Email.Equals(User.Email))
-                {
-                    ValidEmail = false;
-                    break;
-                }
-                else
-                {
-                    ValidEmail = true;
-                }
-                if (user.Username.Equals(User.Username))
-                {
-                    ValidUsername = false;
-                    break;
-                }
-                else
-                {
-                    ValidUsername = true;
-                }
+                ValidUsername = false;
             }
+
+            if (_context.Users.Any(user => user.Email == User.Email))
+            {
+                ValidEmail = false;
+            }
+
         }
 
     }
