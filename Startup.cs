@@ -36,14 +36,13 @@ namespace ELearningV2
                 opt.AddDebug();
             });
             services.AddScoped<ApiContext>();
-            services.AddScoped<SignInManager<User>>();
 
             services.AddDbContextPool<ApiContext>(
                 opt => opt.UseSqlServer(Configuration.GetConnectionString("ElearningDbConnection")));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApiContext>();
-            services.AddRazorPages();
+            services.AddMvc(opt => opt.EnableEndpointRouting = false);
             services.AddControllers();
         }
 
@@ -57,17 +56,21 @@ namespace ELearningV2
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
             app.UseAuthentication();
 
+            app.UseMvc(routes => 
+                routes.MapRoute(
+                    name: "default",
+                    template : "{controller}/{action}",
+                    defaults: new
+                    {
+                        controller = "Home",
+                        action = "Index"
+                    }
+                    )
+            );
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-                endpoints.MapControllers();
-            });
         }
     }
 }

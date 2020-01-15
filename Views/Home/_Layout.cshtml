@@ -11,7 +11,7 @@
             <li class="nav-item">
                 <form method="post">
                     <button type="submit" style="width:auto"
-                            class="nav-link btn btn-link py-0" asp-page="LogOut">
+                            class="nav-link btn btn-link py-0" asp-action="Logout" asp-controller="Users">
                         Logout @User.Identity.Name
                     </button>
                 </form>
@@ -20,12 +20,12 @@
         else
         {
             <li class="nav-item">
-                <a class="nav-link" asp-page="SignUp">
+                <a class="nav-link" asp-action="Register" asp-controller="Users">
                     Register
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-page="Login">
+                <a class="nav-link" asp-action="Login" asp-controller="Users">
                     Login
                 </a>
             </li>
