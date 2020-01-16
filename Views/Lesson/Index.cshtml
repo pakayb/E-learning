@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using ELearningV2.ViewModel
+@using Microsoft.AspNetCore.Identity
+@using ELearningV2.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<User> signInManager;
+@model LessonViewModel
+@{
+    Layout = "_Layout";
+}
+
+<html>
+<body>
+    @if (signInManager.IsSignedIn(User))
+    {
+        <div>
+            <h1>LEARN &#$$#&##&$$&#°°$!</h1>
+            @if(Model.Parts.Count > 0)
+            {
+                @foreach (var part in Model.Parts)
+                {
+                    <h3>Part @part.PartNumber</h3>
+                    <div>
+                        @part.Context
+                    </div>
+                }
+
+            }
+            else
+            {
+                <h3>We are sooooo sorry :( This lesson is empty because we did not created parts for it</h3>
+            }
+        </div>
+}
+    else
+    {
+        <h1>Please Login!</h1>
+    }
+</body>
+</html>

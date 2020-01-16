@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Migrations\20200116084806_Initial.cs" />
-    <Compile Include="Migrations\20200116084806_Initial.Designer.cs" />
+    <Compile Include="Migrations\20200116135959_Initial.cs" />
+    <Compile Include="Migrations\20200116135959_Initial.Designer.cs" />
     <Compile Include="Migrations\ApiContextModelSnapshot.cs" />
   </ItemGroup>
 

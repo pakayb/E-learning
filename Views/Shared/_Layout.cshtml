@@ -4,12 +4,11 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-   
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <div class="navbar ml-auto">
-    <ul class="navbar-nav ml-2">
+    <ul class="navbar-nav">
         @*If the user is signed-in display Logout link*@
         @if (signInManager.IsSignedIn(User))
         {
@@ -24,7 +23,7 @@
         }
         else
         {
-            <li class="nav-item ml">
+            <li class="nav-item">
                 <a class="nav-link" asp-action="Register" asp-controller="Users">
                     Register
                 </a>

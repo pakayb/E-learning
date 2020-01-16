@@ -6,8 +6,8 @@ using ELearningV2.Models;
 
 namespace ELearningV2.ViewModel
 {
-    public class IndexViewModel
+    public class ModuleViewModel
     {
-        public IList<Module> Modules { get; set; }
+        public IList<Lesson> Lessons { get; set; }
     }
 }

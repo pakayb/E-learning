@@ -17,7 +17,7 @@ namespace ELearningV2.Models
 
         [Required]
         [EmailAddress]
-        public override string Email { get => base.Email; set => base.Email = value; }
+        public override string Email { get => base.Email; set => base.Email = value; } 
         public long ReachedPartId { get; set; }
 
     }

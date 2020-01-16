@@ -52,7 +52,9 @@ namespace ELearningV2
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            
             }
+
 
             app.UseHttpsRedirection();
 
@@ -63,11 +65,12 @@ namespace ELearningV2
             app.UseMvc(routes =>
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}",
+                    template: "{controller}/{action}/{id}",
                     defaults: new
                     {
                         controller = "Home",
-                        action = "Index"
+                        action = "Index",
+                        id = ""
                     }
                     )
             );

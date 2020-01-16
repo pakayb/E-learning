@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using ELearningV2.ViewModel
+@using Microsoft.AspNetCore.Identity
+@using ELearningV2.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<User> signInManager;
+@model ModuleViewModel
+@{
+    Layout = "_Layout";
+}
+
+<html>
+<body>
+    @if (signInManager.IsSignedIn(User))
+    {
+        <div>
+            <h1>Choose a Lesson!</h1>
+            <ul>
+                @foreach (var lesson in Model.Lessons)
+                {
+                    <li><a asp-action="Index" asp-controller="Lessons" asp-route-id="@lesson.Id"><strong>@lesson.Title</strong>.</a></li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <h1>Please Login!</h1>
+    }
+</body>
+</html> 
