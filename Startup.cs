@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ELearningV2.Context;
+using Microsoft.AspNetCore.Identity;
+using ELearningV2.Models;
 
 namespace ELearningV2
 {
@@ -34,7 +36,13 @@ namespace ELearningV2
                 opt.AddDebug();
             });
             services.AddScoped<ApiContext>();
-            services.AddRazorPages();
+
+            services.AddDbContextPool<ApiContext>(
+                opt => opt.UseSqlServer(Configuration.GetConnectionString("ElearningDbConnection")));
+
+            services.AddIdentity<User, IdentityRole>(opt => opt.User.RequireUniqueEmail = true)
+                .AddEntityFrameworkStores<ApiContext>();
+            services.AddMvc(opt => opt.EnableEndpointRouting = false);
             services.AddControllers();
         }
 
@@ -48,15 +56,22 @@ namespace ELearningV2
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-                endpoints.MapControllers();
-            });
+            app.UseMvc(routes =>
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action}",
+                    defaults: new
+                    {
+                        controller = "Home",
+                        action = "Index"
+                    }
+                    )
+            );
+
         }
     }
 }
