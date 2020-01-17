@@ -11,13 +11,14 @@
     Layout = "_Layout";
 }
 
+<!DOCTYPE html>
 <html>
 <body>
     @if (signInManager.IsSignedIn(User))
     {
         <div>
             <h1>LEARN &#$$#&##&$$&#°°$!</h1>
-            @if(Model.Parts.Count > 0)
+            @if (Model.Parts.Count > 0)
             {
                 @foreach (var part in Model.Parts)
                 {
@@ -25,6 +26,11 @@
                     <div>
                         @part.Context
                     </div>
+                    <iframe width="560"
+                            height="315"
+                            src="@part.TutorialURL"
+                            frameborder="0"
+                            allowfullscreen></iframe>
                 }
 
             }
@@ -33,10 +39,11 @@
                 <h3>We are sooooo sorry :( This lesson is empty because we did not created parts for it</h3>
             }
         </div>
-}
+    }
     else
     {
-        <h1>Please Login!</h1>
+        <h1>Ooops :( , You are not logged in...</h1>
+        <h3>Please login to see our lessons. </h3>
     }
 </body>
 </html>

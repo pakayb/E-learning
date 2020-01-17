@@ -87,7 +87,8 @@ namespace ELearningV2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PartNumber = table.Column<int>(nullable: false),
                     LessonId = table.Column<long>(nullable: false),
-                    Context = table.Column<string>(nullable: true)
+                    Context = table.Column<string>(nullable: true),
+                    TutorialURL = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

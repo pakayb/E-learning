@@ -33,7 +33,8 @@ namespace ELearningV2.Controllers
                 .Select(p => new Part
                 {
                     PartNumber = p.PartNumber,
-                    Context = p.Context
+                    Context = p.Context,
+                    TutorialURL = p.TutorialURL
                 }).ToList();
 
             LessonViewModel vm = new LessonViewModel { Parts = lessonParts };

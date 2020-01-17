@@ -74,6 +74,9 @@ namespace ELearningV2.Migrations
                     b.Property<int>("PartNumber")
                         .HasColumnType("int");
 
+                    b.Property<string>("TutorialURL")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Parts");

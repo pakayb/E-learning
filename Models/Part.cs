@@ -6,5 +6,7 @@
         public int PartNumber { get; set; }
         public long LessonId { get; set; }
         public string Context { get; set; }
+
+        public string TutorialURL { get; set; }
     }
 }

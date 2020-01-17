@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ELearningV2.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20200116135959_Initial")]
+    [Migration("20200117012822_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,9 @@ namespace ELearningV2.Migrations
 
                     b.Property<int>("PartNumber")
                         .HasColumnType("int");
+
+                    b.Property<string>("TutorialURL")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

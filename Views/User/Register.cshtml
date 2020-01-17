@@ -7,7 +7,7 @@
 
 <div class="card align-items-center">
     <h2>Register</h2>
-    <div class="card-body">
+    <div class="card-body m">
         <form method="post">
             <div class="alert-danger" asp-validation-summary="All"></div>
             <input asp-for="FirstName" placeholder="Firstname" />
@@ -15,7 +15,11 @@
             <input asp-for="UserName" placeholder="Username" />
             <input asp-for="Email" placeholder="Email" />
             <input asp-for="Password" placeholder="Password" />
-            <input type="submit" />
+            <input type="submit" value="Register" />
         </form>
     </div>
+    <h2>Already have an account ?</h2>
+    <a class="nav-link" asp-action="Login" asp-controller="Users">
+        Login
+    </a>
 </div>

@@ -69,7 +69,7 @@ namespace ELearningV2.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError(String.Empty, "Invalid Email or Password");
+                ModelState.AddModelError(String.Empty, "Invalid Username or Password");
             }
 
             return View(model);

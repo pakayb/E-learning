@@ -52,9 +52,14 @@ namespace ELearningV2
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            
+
             }
 
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+                await next();
+            });
 
             app.UseHttpsRedirection();
 
